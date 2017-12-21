@@ -1,0 +1,13 @@
+[
+  {
+    "icon": "el-icon-menu",
+    "index": "/db/main",
+    "title": "主页",
+    "display": "none"
+  },{
+    "icon": "el-icon-edit",
+    "index": "/db/query",
+    "title": "查询",
+    "display": "none"
+  }
+]
