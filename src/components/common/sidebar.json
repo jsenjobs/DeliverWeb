@@ -9,5 +9,10 @@
     "index": "/db/query",
     "title": "查询",
     "display": "none"
+  },{
+    "icon": "el-icon-setting",
+    "index": "/db/adduser",
+    "title": "添加用户",
+    "display": "none"
   }
 ]

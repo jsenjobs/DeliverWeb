@@ -3,6 +3,9 @@ import Router from 'vue-router'
 // import Hello from '@/components/Hello'
 import Main from '@/components/tools/main'
 import Query from '@/components/tools/query'
+import AddUser from '@/components/tools/adduser'
+
+import Login from '@/components/page/login'
 
 Vue.use(Router)
 let router = new Router({
@@ -26,12 +29,20 @@ let router = new Router({
         {
           path: 'query',
           component: Query
+        },
+        {
+          path: 'adduser',
+          component: AddUser
         }
       ]
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     }
   ]
 })
-/*
 import Cookies from '../utils/Cookies.js'
 router.beforeEach((to, from, next) => {
   // alert(sessionStorage.getItem('accessToken'))
@@ -53,5 +64,4 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-*/
 export default router

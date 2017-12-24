@@ -98,13 +98,6 @@
       }
     },
     mounted: function() {
-    tableDataExample: [{
-      id: 170001,
-      date: '2016-05-03',
-      price: 'food.pdf',
-      introduce: '数据',
-      openid:'123452'
-    }]
       this.$http.get('https://aaa.bigfacewo.com/dwssserverso/order/query/day?date=' + Date.now()).then(res => {
           let data = res.data
           if(data && data.code === 0) {
