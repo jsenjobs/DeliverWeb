@@ -7,15 +7,28 @@
         border
         style="width: 100%">
         <el-table-column
-          fixed
           prop="id"
-          label="编号"
-          width="300">
+          label="订单号"
+          width="290">
         </el-table-column>
         <el-table-column
           prop="date"
           label="日期"
-          width="230">
+          width="240">
+        </el-table-column>
+        <el-table-column
+          prop="openid"
+          label="手机号"
+          width="150">
+        </el-table-column>
+        <el-table-column
+          prop="name"
+          label="用户名"
+          width="100">
+        </el-table-column>
+        <el-table-column
+          prop="address"
+          label="用户地址">
         </el-table-column>
         <el-table-column
           prop="price"
@@ -24,16 +37,13 @@
         </el-table-column>
         <el-table-column
           prop="introduce"
-          label="描述">
+          label="描述"
+          width="200">
         </el-table-column>
         <el-table-column
-          fixed="right"
-          label="操作"
+          prop="stat"
+          label="状态"
           width="140">
-          <template scope="scope">
-            <el-button v-if="scope.row.button" @click="handleClick(scope.$index, scope.row)" type="text">点击确认送完</el-button>
-            <span v-if="!scope.row.button">已送完</span>
-          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -41,9 +51,9 @@
 </template>
 
 <script>
-  const price = [2000, 1000, 500]
-  const desc = ['大桶', '中桶', '小桶']
   import SH from './SocketHelp.js'
+  import apis from '../../apis.json'
+  import Common from '../../utils/Common.js'
   let canShow = true
   export default {
     data () {
@@ -59,30 +69,6 @@
       }
     },
     methods: {
-      handleClick (index, row) {
-        // SH.ok_notify(this.$socket)
-        // https://aaa.bigfacewo.com/dwssserverso/ok_notify/:out_trade_no
-        this.$http.get('https://aaa.bigfacewo.com/dwssserverso/order/sended/' + row.id).then(res => {
-          let data = res.data
-          if(data && data.code === 0) {
-            this.tableData[index].button = false
-            this.$message({
-              message: '送水成功',
-              type: 'success',
-            })
-          } else {
-              this.$message({
-                message: '网络错误',
-                type: 'success',
-              })
-          }
-        }, res => {
-          this.$message({
-            message: '网络错误',
-            type: 'success',
-          })
-        })
-      },
       showNewOrder: function() {
         if(canShow) {
           canShow = false
@@ -98,32 +84,15 @@
       }
     },
     mounted: function() {
-      this.$http.get('https://aaa.bigfacewo.com/dwssserverso/order/query/day?date=' + Date.now()).then(res => {
+      let statstrs = ['已完成', '等待用户确认']
+      this.$http.get(apis.QueryByDay + '/' + Date.now()).then(res => {
           let data = res.data
           if(data && data.code === 0) {
             this.tableData = []
-            data.data.forEach( nData => {
-              if(nData.stat === 1) {
-                let oData = {
-                  id: nData._id,
-                  date: new Date(nData.date).format('yy年MM月dd日 HH时mm分ss秒'),
-                  price: (price[nData.type] * nData.num / 100) + '元',
-                  introduce: '购买' + desc[nData.type] + '饮用水' + nData.num + '箱',
-                  openid: nData.openid,
-                  button:true
-                }
-                this.tableData.push(oData)
-              } else if(nData.stat === 0) {
-                let oData = {
-                  id: nData._id,
-                  date: new Date(nData.date).format('yy年MM月dd日 HH时mm分ss秒'),
-                  price: (price[nData.type] * nData.num / 100) + '元',
-                  introduce: '购买' + desc[nData.type] + '饮用水' + nData.num + '箱',
-                  openid: nData.openid,
-                  button:false
-                }
-                this.tableData.push(oData)
-              }
+            data.data.forEach( order => {
+              let oData = Common.createTableItem(order)
+              oData.stat = statstrs[order.stat]
+              this.tableData.push(oData)
             })
 
             this.$message({
@@ -149,15 +118,7 @@
       SH.bind(data => {
         if(data.type === 'snotify') {
           this.showNewOrder()
-          let nData = data.data
-          let oData = {
-            id: nData._id,
-            date: new Date(nData.date).format('yy年MM月dd日 HH时mm分ss秒'),
-            price: (price[nData.type] * nData.num / 100) + '元',
-            introduce: '购买' + desc[nData.type] + '饮用水' + nData.num + '箱',
-            openid: nData.openid
-          }
-          this.$store.commit('pushtableData', oData)
+          this.$store.commit('pushtableData', Common.createTableItem(data.data))
         }
       })
     },

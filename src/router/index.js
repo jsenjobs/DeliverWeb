@@ -3,6 +3,7 @@ import Router from 'vue-router'
 // import Hello from '@/components/Hello'
 import Main from '@/components/tools/main'
 import Query from '@/components/tools/query'
+import Orders from '@/components/tools/orders'
 import AddUser from '@/components/tools/adduser'
 
 import Login from '@/components/page/login'
@@ -33,6 +34,10 @@ let router = new Router({
         {
           path: 'adduser',
           component: AddUser
+        },
+        {
+          path: 'orders',
+          component: Orders
         }
       ]
     },

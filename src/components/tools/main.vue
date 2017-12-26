@@ -9,13 +9,27 @@
         <el-table-column
           fixed
           prop="id"
-          label="编号"
-          width="300">
+          label="订单号"
+          width="290">
         </el-table-column>
         <el-table-column
           prop="date"
           label="日期"
-          width="230">
+          width="240">
+        </el-table-column>
+        <el-table-column
+          prop="openid"
+          label="手机号"
+          width="150">
+        </el-table-column>
+        <el-table-column
+          prop="name"
+          label="用户名"
+          width="100">
+        </el-table-column>
+        <el-table-column
+          prop="address"
+          label="用户地址">
         </el-table-column>
         <el-table-column
           prop="price"
@@ -40,10 +54,10 @@
 </template>
 
 <script>
-  const price = [2000, 1000, 500]
-  const desc = ['大桶', '中桶', '小桶']
   import SH from './SocketHelp.js'
+  import Common from '../../utils/Common.js'
   let canShow = true
+  import apis from '../../apis.json'
   export default {
     data () {
       return {
@@ -61,7 +75,7 @@
       handleClick (index, row) {
         // SH.ok_notify(this.$socket)
         // https://aaa.bigfacewo.com/dwssserverso/ok_notify/:out_trade_no
-        this.$http.get('https://aaa.bigfacewo.com/dwssserverso/ok_notify/' + row.openid).then(res => {
+        this.$http.get(apis.NotifyGetOrder + '/' + row.openid).then(res => {
           if(!res.data) {
             this.$message({
               message: '确认失败',
@@ -110,15 +124,7 @@
       SH.bind(data => {
         if(data.type === 'snotify') {
           this.showNewOrder()
-          let nData = data.data
-          let oData = {
-            id: nData._id,
-            date: new Date(nData.date).format('yy年MM月dd日 HH时mm分ss秒'),
-            price: (price[nData.type] * nData.num / 100) + '元',
-            introduce: '购买' + desc[nData.type] + '饮用水' + nData.num + '箱',
-            openid: nData.openid
-          }
-          this.$store.commit('pushtableData', oData)
+          this.$store.commit('pushtableData', Common.createTableItem(data.data))
           this.tableData.push(oData)
         }
       })

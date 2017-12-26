@@ -1,0 +1,10 @@
+{
+  "login":"http://localhost:7084/xxv1/1vxx/admin/login",
+  "createUser":"http://localhost:7084/xxv1/1vxx/admin/user/create",
+  "resetPass":"http://localhost:7084/xxv1/1vxx/admin/user/reset/password",
+  "resetAddress":"http://localhost:7084/xxv1/1vxx/admin/user/reset/address",
+  "QueryByDay":"http://localhost:7084/order/query/day",
+  "SearchOrderByID":"http://localhost:7084/order/query/id",
+  "GetOrderByPage":"http://localhost:7084/order/get",
+  "NotifyGetOrder":"https://aaa.bigfacewo.com/dwssserverso/ok_notify"
+}

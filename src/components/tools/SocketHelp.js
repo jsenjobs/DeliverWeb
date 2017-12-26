@@ -1,5 +1,6 @@
 
 let UUID = require('uuid')
+let apis = require('../../apis.json')
 var W3CWebSocket = require('websocket').w3cwebsocket;
 var client = null
 checkStat()
@@ -85,13 +86,13 @@ var instance = false
 function checkStat() {
   if(!stat && !instance) {
     instance = true
-    client = new W3CWebSocket('wss://aaa.bigfacewo.com/dwss', 'echo-protocol')
+    client = new W3CWebSocket(apis.NotifySocket, 'echo-protocol')
     setupClient()
   }
   setInterval(_ => {
     if(!stat && !instance) {
       instance = true
-      client = new W3CWebSocket('wss://aaa.bigfacewo.com/dwss', 'echo-protocol')
+      client = new W3CWebSocket(apis.NotifySocket, 'echo-protocol')
       setupClient()
     }
   }, 10000)

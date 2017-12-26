@@ -68,6 +68,8 @@
           let expireDays = 15;
           this.setCookie('usession', JSON.stringify(res.body.token), expireDays);
           // localStorage.setItem('utoken', res.body.token)
+          this.setCookie('token',  res.body.token)
+          this.setCookie('principal',  res.body.username)
           Vue.http.headers.common['token'] = res.body.token
           Vue.http.headers.common['principal'] = this.username
 

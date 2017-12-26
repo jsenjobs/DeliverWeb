@@ -7,7 +7,12 @@
   },{
     "icon": "el-icon-edit",
     "index": "/db/query",
-    "title": "查询",
+    "title": "今日订单",
+    "display": "none"
+  },{
+    "icon": "el-icon-document",
+    "index": "/db/orders",
+    "title": "所有订单",
     "display": "none"
   },{
     "icon": "el-icon-setting",

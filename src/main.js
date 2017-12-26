@@ -71,6 +71,11 @@ Vue.directive('focus', {
 
 import Cookies from './utils/Cookies.js'
 Cookies.setUpCookies(Vue)
+
+
+Vue.http.headers.common['token'] = Cookies.getCookie('token')
+Vue.http.headers.common['principal'] = Cookies.getCookie('principal')
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

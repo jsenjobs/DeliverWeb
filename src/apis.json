@@ -1,5 +1,12 @@
 {
-  "login":"https://aaa.bigfacewo.com/dwssserveruser/xxv1/1vxx/admin/login",
-  "createUser":"https://aaa.bigfacewo.com/dwssserveruser/xxv1/1vxx/admin/user/create",
-  "resetPass":"https://aaa.bigfacewo.com/dwssserveruser/xxv1/1vxx/admin/user/reset"
+  "login":"https://deliverwater.sanliyunkeji.com/dwssserveruser/xxv1/1vxx/admin/login",
+  "createUser":"https://deliverwater.sanliyunkeji.com/dwssserveruser/xxv1/1vxx/admin/user/create",
+  "resetPass":"https://deliverwater.sanliyunkeji.com/dwssserveruser/xxv1/1vxx/admin/user/reset/password",
+  "resetAddress":"https://deliverwater.sanliyunkeji.com/dwssserveruser/xxv1/1vxx/admin/user/reset/address",
+  "QueryByDay":"https://deliverwater.sanliyunkeji.com/dwssserveruser/order/query/day",
+  "SearchOrderByID":"https://deliverwater.sanliyunkeji.com/dwssserveruser/order/query/id",
+  "GetOrderByPage":"https://deliverwater.sanliyunkeji.com/dwssserveruser/order/get",
+
+  "NotifyGetOrder":"https://deliverwater.sanliyunkeji.com/dwssserverso/ok_notify",
+  "NotifySocket":"wss://deliverwater.sanliyunkeji.com/dwss"
 }
