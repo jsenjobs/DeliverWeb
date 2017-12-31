@@ -75,7 +75,7 @@
       handleClick (index, row) {
         // SH.ok_notify(this.$socket)
         // https://aaa.bigfacewo.com/dwssserverso/ok_notify/:out_trade_no
-        this.$http.get(apis.NotifyGetOrder + '/' + row.openid).then(res => {
+        this.$http.get(apis.NotifyGetOrder + '/' + row.id).then(res => {
           if(!res.data) {
             this.$message({
               message: '确认失败',

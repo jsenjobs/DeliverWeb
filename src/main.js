@@ -55,6 +55,12 @@ let vuex_store = new Vuex.Store({
 	},
 	mutations: {
 		pushtableData(state, data) {
+			let id = data._id
+			for(state.tableData.forEach(item => {
+				if(item._id === id) {
+					return
+				}
+			}))
 			state.tableData.push(data)
 		}
 	}
