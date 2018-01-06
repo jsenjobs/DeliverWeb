@@ -218,7 +218,6 @@
       }
     },
     mounted: function() {
-
       SH.bind(data => {
         if(data.type === 'snotify') {
           this.showNewOrder()
